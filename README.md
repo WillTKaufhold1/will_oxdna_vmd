@@ -20,7 +20,7 @@ There are also scripts here that extract energy profiles from simulation traject
 
 ## Rendered images
 
-![strands](/images/strand.ppm)
+![strands](/images/strand.png)
 
 ## Requirements
 
