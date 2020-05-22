@@ -18,12 +18,19 @@ There are also scripts here that extract energy profiles from simulation traject
 1. DH: 
 1. total: total energy 
 
-## Rendered images
+## Example rendered images
 
 <img src="/images/strand.png" width="324" height="324">
+A section of DNA origami colored by strand id. The red strand is the scaffold.
+
 <img src="/images/HBs.png" width="324" height="324">
+Colored by mean HB energy. dsDNA is colored red (large negative HB energy); ssDNA is colored blue (0 HB energy). Crossovers and the terminii of strands are colored somewhere between as hydrogen bonding occurs here but not as strongly as in the origami bulk.
+
 <img src="/images/stacking.png" width="324" height="324">
+Colored by stacking energy: red is highly stacked; blue is unstacked. Observe substantial reduction of stacking energy at crossovers in the origami bulk. ssDNA (colored blue in Fig. 2) still stacks strongly, possibly an artefact of the oxDNA force field, or maybe a real effect?
+
 <img src="/images/FENE.png" width="324" height="324">
+Colored by FENE potential (i.e. backbond connectivity cost). Since terminal nucleotides in strands only have one FENE potential instead of 2, these nucleotides have comparatively low FENE interaction energies. Noticce the strain in some of the helices, notably on the left; this indicates either compression or expansion.
 
 ## Requirements
 
