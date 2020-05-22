@@ -20,9 +20,10 @@ There are also scripts here that extract energy profiles from simulation traject
 
 ## Rendered images
 
-![strands](/images/strand.png)
-
 <img src="/images/strand.png" width="324" height="324">
+<img src="/images/HBs.png" width="324" height="324">
+<img src="/images/stacking.png" width="324" height="324">
+<img src="/images/FENE.png" width="324" height="324">
 
 ## Requirements
 
