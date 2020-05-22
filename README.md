@@ -8,15 +8,19 @@ The scripts here take an oxDNA .dat file, and generate a .xyz file, and a .psf f
 
 There are also scripts here that extract energy profiles from simulation trajectories, and then colorcode nucleotdies in VMD according to energy value. Specifically nucleotdies can be colored according to each the value of each energy component in the oxDNA force field. These components can be: 
 
-(1) FENE : Finite extension non-linear elastic potential; backbone stretching. 
-(2) BEXC
-(3) STCK: Stacking energies
-(4) NEXC: Excluded volume
-(5) HB: Hydrogen bonding
-(6) CRSTCK: Cross stacking
-(7) CXSTACK: Unused
-(8) DH: 
-(9) total: total energy 
+1. FENE : Finite extension non-linear elastic potential; backbone stretching. 
+1. BEXC
+1. STCK: Stacking energies
+1. NEXC: Excluded volume
+1. HB: Hydrogen bonding
+1. CRSTCK: Cross stacking
+1. CXSTACK: Unused
+1. DH: 
+1. total: total energy 
+
+## Rendered images
+
+![strands](/images/strand.ppm)
 
 ## Requirements
 
