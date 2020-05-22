@@ -22,6 +22,8 @@ There are also scripts here that extract energy profiles from simulation traject
 
 ![strands](/images/strand.png)
 
+<img src="/images/strand.png" width="324" height="324">
+
 ## Requirements
 
 In principle I designed these scripts for VMD. However, they may work with any other visualization toolkit that can read and .xyz and .psf file.
