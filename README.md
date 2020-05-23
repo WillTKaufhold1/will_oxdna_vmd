@@ -21,16 +21,16 @@ There are also scripts here that extract energy profiles from simulation traject
 ## Example rendered images
 
 <img src="/images/strand.png" width="324" height="324">
-A section of DNA origami colored by strand id. The red strand is the scaffold.
+Fig. 1: A section of DNA origami colored by strand id. The red strand is the scaffold.
 
 <img src="/images/HBs.png" width="324" height="324">
-Colored by mean HB energy. dsDNA is colored red (large negative HB energy); ssDNA is colored blue (0 HB energy). Crossovers and the terminii of strands are colored somewhere between as hydrogen bonding occurs here but not as strongly as in the origami bulk.
+Fig. 2: Colored by mean HB energy. dsDNA is colored red (large negative HB energy); ssDNA is colored blue (0 HB energy). Crossovers and the terminii of strands are colored somewhere between as hydrogen bonding occurs here but not as strongly as in the origami bulk.
 
 <img src="/images/stacking.png" width="324" height="324">
-Colored by stacking energy: red is highly stacked; blue is unstacked. Observe substantial reduction of stacking energy at crossovers in the origami bulk. ssDNA (colored blue in Fig. 2) still stacks strongly, possibly an artefact of the oxDNA force field, or maybe a real effect?
+Fig. 3: Colored by stacking energy: red is highly stacked; blue is unstacked. Observe substantial reduction of stacking energy at crossovers in the origami bulk. ssDNA (colored blue in Fig. 2) still stacks strongly, possibly an artefact of the oxDNA force field, or maybe a real effect?
 
 <img src="/images/FENE.png" width="324" height="324">
-Colored by FENE potential (i.e. backbond connectivity cost). Since terminal nucleotides in strands only have one FENE potential instead of 2, these nucleotides have comparatively low FENE interaction energies. Noticce the strain in some of the helices, notably on the left; this indicates either compression or expansion.
+Fig. 4: Colored by FENE potential (i.e. backbond connectivity cost). Since terminal nucleotides in strands only have one FENE potential instead of 2, these nucleotides have comparatively low FENE interaction energies. Noticce the strain in some of the helices, notably on the left; this indicates either compression or expansion.
 
 ## Requirements
 
@@ -46,7 +46,9 @@ And I've only tested this on Linux, although it should probably work on OSX as w
 
 ## Instructions for use
 
+The general principle is to use DNAnalysis to generate an energy file detailing pairwise energies as a function of trajectory time, then use this energy file to construct a PSF. vmd can then read the PSF with which contains bond connectivity, and also read a converted xyz file which contains positional information. To trick vmd into color coding energies, the energy values are hidden in the charge attribute of the PSF. 
 
+TODO: actually write instructions
 
 
 
