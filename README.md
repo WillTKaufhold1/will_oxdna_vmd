@@ -2,11 +2,11 @@
 
 ## Intro
 
-I wanted to integrate oxDNA effectively into VMD. These are a collection of scripts that perform this integration. The reason I wanted effective integration was that I wanted to lever the VMD package ecosystem when analysing DNA origami. 
+I wanted to integrate oxDNA visualization effectively into VMD. These are a collection of scripts that perform this integration. 
 
-The scripts here take an oxDNA .dat file, and generate a .xyz file, and a .psf file. Locations of hydrogen bonding (HB) and phosphate repulsion (BB) sites are placed in the .xyz file, and bond connectivity is placed in the .psf file. Bond connectivity includes one bond between the HB site and BB site,and a second bond between BB sites that are connected.
+The scripts here take an oxDNA .dat file, and generate a .xyz file and a .psf file. Locations of stacking (S) and phosphate repulsion (BB) sites are placed in the .xyz file, and bond connectivity is placed in the .psf file. Bond connectivity includes one bond between the S site and BB site,and a second bond between BB sites that are connected.
 
-There are also scripts here that extract energy profiles from simulation trajectories, and then colorcode nucleotdies in VMD according to energy value. Specifically nucleotdies can be colored according to each the value of each energy component in the oxDNA force field. These components can be: 
+There are also scripts here that extract energy profiles from simulation trajectories, and then colorcode nucleotides in VMD according to energy value. Specifically, nucleotides can be colored according to each the value of each energy component in the oxDNA force field. These components can be: 
 
 1. FENE : Finite extension non-linear elastic potential; backbone stretching. 
 1. BEXC : Backbone excluded volume
@@ -27,23 +27,26 @@ Fig. 1: A section of DNA origami colored by strand id. The red strand is the sca
 Fig. 2: Colored by mean HB energy. dsDNA is colored red (large negative HB energy); ssDNA is colored blue (0 HB energy). Crossovers and the terminii of strands are colored somewhere between as hydrogen bonding occurs here but not as strongly as in the origami bulk.
 
 <img src="/images/2/STCK2.png" width="324" height="324">
-Fig. 3: Colored by stacking energy: red is highly stacked; blue is unstacked. Observe substantial reduction of stacking energy at crossovers in the origami bulk. ssDNA (colored blue in Fig. 2) still stacks strongly, possibly an artefact of the oxDNA force field, or maybe a real effect?
+Fig. 3: Colored by stacking energy: red is highly stacked; blue is unstacked. Observe substantial reduction of stacking energy at crossovers in the origami bulk. 
 
 <img src="/images/2/CTSTACK2.png" width="324" height="324">
-Fig. 4: Cross stacking 
+Fig. 4: Cross stacking; notice reduction at crossovers.
 
 <img src="/images/2/CXSTACK2.png" width="324" height="324">
-Fig. 5: Co-axial stacking 
+Fig. 5: Co-axial stacking; notice reduction at crossovers.
+
 <img src="/images/2/FENE2.png" width="324" height="324">
-Fig. 6: Colored by FENE potential (i.e. backbond connectivity cost). Since terminal nucleotides in strands only have one FENE potential instead of 2, these nucleotides have comparatively low FENE interaction energies. Noticce the strain in some of the helices, notably on the left; this indicates either compression or expansion.
+Fig. 6: Colored by FENE potential (i.e. backbond connectivity cost). Since terminal nucleotides in strands only have one FENE potential instead of 2, these nucleotides have comparatively low FENE interaction energies. 
+
 <img src="/images/2/DH2.png" width="324" height="324">
 Fig. 7: Debye-Huckel potential (i.e. electrostatic repulsion)
+
 <img src="/images/2/TOTAL2.png" width="324" height="324">
 Fig. 8: Total energy
 
 ## Requirements
 
-In principle I designed these scripts for VMD. However, they may work with any other visualization toolkit that can read and .xyz and .psf file.
+In principle I designed these scripts to generate files for VMD. However, they may work with any other visualization toolkit that can read and .xyz and .psf file.
 
 Python scripts need Python>=3.5 with numpy and pandas 
 
