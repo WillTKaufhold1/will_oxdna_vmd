@@ -55,6 +55,31 @@ And I've only tested this on Linux, although it should probably work on OSX as w
 
 The general principle is to use DNAnalysis to generate an energy file detailing pairwise energies as a function of trajectory time, then use this energy file to construct a PSF. vmd can then read the PSF with which contains bond connectivity, and also read a converted xyz file which contains positional information. To trick vmd into color coding energies, the energy values are hidden in the charge attribute of the PSF. 
 
+In the src directory, running the RUN.sh followed by the location of the the trajectory file and topology file should generate the relevant PSF files and XYZ files. Since energy is also generated, the input file which was used to run oxDNA is also needed.
+
+The XYZ files are placed in 1.traj-xyz-generation directory, and the PSF files are placed in the 3.psf-generation directory.
+
+## Example 
+
+The example trajectory contains a short trajectory, with relevant PSF files. To look at the HB energy distribution,  run "vmd traj-HB.psf test.xyz", which should load the molecule. Subsequently in the vmd visualization menu, the color by section should be set to charge. For each PSF, coloring by strand is also possible. To do this, change the color by section to resid.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

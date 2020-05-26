@@ -6,16 +6,14 @@ let main args =
     let mutable top_fname = ""
     let mutable dat_fname = ""
  
-    //top_fname <- args.[0]
-    //dat_fname <- args.[1]
-    
-    // let's take the dat file and then the top file as args, then a string indicating some preferences
+    let dat = Environment.GetCommandLineArgs().[1]
+    let top = Environment.GetCommandLineArgs().[2]
 
-    use sr_top = new StreamReader ("top")
+    use sr_top = new StreamReader (top)
     let first_line = sr_top.ReadLine()
     let N_part = first_line.Split(' ').[0]
 
-    use sr = new StreamReader ("dat")
+    use sr = new StreamReader (dat)
     let mutable line = ""
     let mutable X_ = "" 
     let mutable Y_ = ""  
