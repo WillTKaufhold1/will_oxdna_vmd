@@ -1,5 +1,7 @@
 # Will's oxDNA scripts for VMD
 
+## Stuff slightly broken at the moment; I would avoid using...
+
 ## Intro
 
 I wanted to integrate oxDNA visualization effectively into VMD. These are a collection of scripts that perform this integration. 
