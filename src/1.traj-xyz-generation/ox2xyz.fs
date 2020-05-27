@@ -87,15 +87,18 @@ let main args =
             while Z < 0. do           
                 Z <- Z + delta
 
-            X_ <- string (X - 0.4 * bX) 
-            Y_ <- string (Y - 0.4 * bY)
-            Z_ <- string (Z - 0.4 * bZ)
+
+            // backbone
+            X_ <- string (X - 0.34 * bX + 0.3408*cX) 
+            Y_ <- string (Y - 0.34 * bY + 0.3408*cY)
+            Z_ <- string (Z - 0.34 * bZ + 0.3408*cZ)
             localline <- "O " + X_ + " " + Y_ + " " + Z_
             System.Console.WriteLine(localline)
 
-            X_ <- string (X + 0.4 * bX + cX*0.34) // this is the stacking site.
-            Y_ <- string (Y + 0.4 * bY + cY*0.34) // NB: all of these interaction values come from the model.h file.kj
-            Z_ <- string (Z + 0.4 * bZ + cZ*0.34)
+            //stacking site
+            X_ <- string (X + 0.34 * bX ) // this is the stacking site.
+            Y_ <- string (Y + 0.34 * bY ) // NB: all of these interaction values come from the model.h file.kj
+            Z_ <- string (Z + 0.34 * bZ )
             localline <- "C " + X_ + " " + Y_ + " " + Z_
 
             System.Console.WriteLine(localline)

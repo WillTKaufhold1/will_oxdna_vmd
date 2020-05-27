@@ -67,7 +67,9 @@ The XYZ files are placed in 1.traj-xyz-generation directory, and the PSF files a
 The example trajectory contains a short trajectory, with relevant PSF files. To look at the HB energy distribution,  run "vmd traj-HB.psf test.xyz", which should load the molecule. Subsequently in the vmd visualization menu, the color by section should be set to charge. For each PSF, coloring by strand is also possible. To do this, change the color by section to resid.
 
 
+## Implementation
 
+Everything is wrapped as a Python package, although scripts will also run independently. Bottlenecks in Python have been writted in C, with Python wrappers. 
 
 
 
