@@ -5,7 +5,7 @@
 int main () {
     // TODO: sort out periodic boundary problems...
     FILE *fp_top;
-    fp_top = fopen("top","r");
+    fp_top = fopen(top,"r");
     char buff[1000]; // buffer
     fscanf(fp_top, "%s", buff);
     fclose(fp_top);
@@ -14,7 +14,7 @@ int main () {
     float STACK [3] ; 
     float BACK [3] ;
     FILE *fp_dat;
-    fp_dat = fopen("dat","r");
+    fp_dat = fopen(dat,"r");
     float BOX_SIZE = 0;
     while (fgets (buff, sizeof(buff), fp_dat)) {
         if (buff[0] == 't') {
@@ -59,7 +59,6 @@ int main () {
 
     return 0;
     }
-
 
 
 

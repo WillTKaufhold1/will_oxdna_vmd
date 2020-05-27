@@ -4,8 +4,6 @@ import numpy as np
 import pandas as pd
 import sys
 
-fname = sys.argv[1]
-
 def get_energies(lines):
 
     energy_dict = {}
@@ -21,36 +19,37 @@ def get_energies(lines):
         energy.append(energy_dict[key])
     return np.array(energy)
 
-NFRAMES = 0
-#maybe would be much much faster if vectorized.
-with open(fname,"r") as f :
-    
-    all_data = []
-    local = []
-    
-    for i in f:
 
-        if i[:2] == "#T":
-            if local != []: 
-                energies = get_energies(local)
-                if all_data == []:
-                    all_data = energies
-                else:
-                    all_data += energies
-                local = []
-                NFRAMES += 1
-        elif i[:2] == "#i":
-            pass
-        else:
-            local.append(list(map(float,i.replace('\n','').split())))
+def read_stuff(fname):
+    NFRAMES = 0
+    with open(fname,"r") as f :
+        
+        all_data = []
+        local = []
+        
+        for i in f:
 
-#id1 id2 FENE BEXC STCK NEXC HB CRSTCK CXSTCK DH total, t = 10000
+            if i[:2] == "#T":
+                if local != []: 
+                    energies = get_energies(local)
+                    if all_data == []:
+                        all_data = energies
+                    else:
+                        all_data += energies
+                    local = []
+                    NFRAMES += 1
+            elif i[:2] == "#i":
+                pass
+            else:
+                local.append(list(map(float,i.replace('\n','').split())))
 
-all_data = all_data / NFRAMES #normalization
+    #id1 id2 FENE BEXC STCK NEXC HB CRSTCK CXSTCK DH total, t = 10000
 
-import pickle as pkl
+    all_data = all_data / NFRAMES #normalization
 
-pkl.dump(all_data, open("averaged_data.pkl",'w+b'))
+    import pickle as pkl
+
+    pkl.dump(all_data, open("averaged_data.pkl",'w+b'))
 
 
 
