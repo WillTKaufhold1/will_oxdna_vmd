@@ -6,7 +6,7 @@ import sys
 from functools import reduce
 from copy import copy
 
-def write_psf(topfile):
+def write_psf(topfile,dump_dirname):
 
     with open(topfile,'r') as f: data = list(map(lambda x :x.replace('\n',''),f.readlines()))
 
@@ -36,7 +36,7 @@ def write_psf(topfile):
         # think we're going to have to actually be careful with this.
         return sanc_energy
 
-    energy_data = np.array(pkl.load(open('./averaged_data.pkl','rb'))) # list of values
+    energy_data = np.array(pkl.load(open(f'./{dump_dirname}/averaged_data.pkl','rb'))) # list of values
     #id1 id2 FENE BEXC STCK NEXC HB CRSTCK CXSTCK DH total, t = 10000
     #consider applying a standard scaler to the energy_data?
     energy_dict = {}
@@ -82,7 +82,7 @@ def write_psf(topfile):
 
     import os
     for key in energy_dict:
-        os.system(f"cat header1 ATOMS.{key}.txt header2 BONDS.txt > traj-{key}.psf")
+        os.system(f"cat header1 ATOMS.{key}.txt header2 BONDS.txt > {dump_dirname}/traj-{key}.psf")
         os.system(f"rm ATOMS.{key}.txt")
     os.system("rm BONDS.txt")
     os.system("rm header1")

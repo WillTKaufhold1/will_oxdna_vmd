@@ -1,0 +1,5 @@
+analysis_data_output_1 = {
+name = stdout
+print_every = 1
+col_1 = {
+type=pair_energy}}
