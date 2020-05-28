@@ -1,0 +1,43 @@
+##############################
+####  PROGRAM PARAMETERS  ####
+##############################
+interaction_type = DNA2
+salt_concentration = 0.5
+sim_type = MD
+backend = CUDA
+backend_precision = mixed
+#debug = 1
+seed = 912567
+
+##############################
+####    SIM PARAMETERS    ####
+##############################
+steps = 10000000000
+newtonian_steps = 103
+diff_coeff = 2.5
+thermostat = john
+
+list_type = cells
+T = 291.000000 K
+dt = 0.003
+verlet_skin = 0.5
+max_backbone_force = 5
+fix_diffusion = 0
+##############################
+####    INPUT / OUTPUT    ####
+##############################
+topology = top
+#conf_file = generated.dat
+refresh_vel = 1
+#log_file = output/out-oxdna.log
+#no_stdout_energy = 1
+restart_step_counter = 1
+print_conf_interval = 10000
+print_energy_every = 10000
+time_scale = linear
+external_forces = 0
+analysis_data_output_1 = {
+name = stdout
+print_every = 1
+col_1 = {
+type=pair_energy}}

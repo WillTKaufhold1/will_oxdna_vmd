@@ -17,6 +17,7 @@ class Trajectory():
 
     def make_xyz_file(self,xyz_fname):
         # how to call a c file from Python ? 
+
         os.system("./a.out > xyz.xyz")
     
     def make_energy_file(self):
