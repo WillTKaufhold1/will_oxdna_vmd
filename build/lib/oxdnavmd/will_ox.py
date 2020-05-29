@@ -1,8 +1,8 @@
 #!/home/wtk23/anaconda3/bin/python
 import os
 import subprocess
-import psf_maker
-import process_energies
+from . import psf_maker
+from . import process_energies
 
 from ctypes import *
 
@@ -15,9 +15,13 @@ class Trajectory():
         self.energy_fname = energy_fname
 
     def make_xyz_file(self,xyz_fname):
-        adder = CDLL("./ox2xyzmodule.so")
+
+	libname = os.path.abspath(
+	    os.path.join(os.path.dirname(__file__), "ox2xyzmodule.so"))
+
+        mod = CDLL(libname)
         
-        result = adder.ox2xyz_run(
+        result = mod.ox2xyz_run(
             str(self.dat_fname).encode("ascii"), str(self.top_fname).encode("ascii"),
 str(self.energy_fname).encode("ascii")
                     )

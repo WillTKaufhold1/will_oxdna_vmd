@@ -1,5 +1,9 @@
-from setuptools import setup, find_packages, Extension
-#todo write up extension
+from distutils.core import setup, Extension
+from setuptools import find_packages
+
+
+module1 = Extension("ox2xyzmodule",
+            sources = ["ox2xyzmodule.c"])
 
 setup (name = 'oxdnavmd',
        version = '0.1',
@@ -10,3 +14,4 @@ setup (name = 'oxdnavmd',
        licence = "GPL",
        packages = find_packages()
 )
+
