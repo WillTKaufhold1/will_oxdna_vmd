@@ -1,8 +1,0 @@
-LICENSE
-README.md
-setup.py
-oxdna-vmd/ox2xyzmodule.c
-oxdna_vmd.egg-info/PKG-INFO
-oxdna_vmd.egg-info/SOURCES.txt
-oxdna_vmd.egg-info/dependency_links.txt
-oxdna_vmd.egg-info/top_level.txt

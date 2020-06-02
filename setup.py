@@ -1,9 +1,9 @@
-from distutils.core import setup, Extension
+from setuptools import Extension, setup
 from setuptools import find_packages
 
-
-module1 = Extension("ox2xyzmodule",
-            sources = ["ox2xyzmodule.c"])
+#there are problems with this.
+module1 = Extension("oxdnavmd.ox2xyz",
+            sources = ["./oxdnavmd/ox2xyzmodule.c"])
 
 setup (name = 'oxdnavmd',
        version = '0.1',
@@ -12,6 +12,5 @@ setup (name = 'oxdnavmd',
        author_email = 'wtk23@cam.ac.uk',
        url = "https://github.com/WillTKaufhold1/will_oxdna_vmd",
        licence = "GPL",
-       packages = find_packages()
-)
-
+       packages = find_packages(),
+       ext_modules = [module1])

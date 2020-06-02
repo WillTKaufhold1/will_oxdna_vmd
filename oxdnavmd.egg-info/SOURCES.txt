@@ -1,6 +1,8 @@
 LICENSE
 README.md
 setup.py
+./oxdnavmd/ox2xyzmodule.c
+__pycache__/setup.cpython-37.pyc
 data/ENERGIES.dat
 data/averaged_data.pkl
 data/dat
@@ -20,13 +22,10 @@ data/traj-STCK.psf
 data/traj-total.psf
 dist/oxdna_vmd-0.1-py3.7-linux-x86_64.egg
 dist/oxdnavmd-0.1-py3.7.egg
-oxdna_vmd.egg-info/PKG-INFO
-oxdna_vmd.egg-info/SOURCES.txt
-oxdna_vmd.egg-info/dependency_links.txt
-oxdna_vmd.egg-info/top_level.txt
 oxdnavmd/Makefile
 oxdnavmd/__init__.py
 oxdnavmd/ox2xyzmodule.c
+oxdnavmd/ox2xyzmodule.so
 oxdnavmd/process_energies.py
 oxdnavmd/psf_maker.py
 oxdnavmd/will_ox.py

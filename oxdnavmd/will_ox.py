@@ -7,23 +7,22 @@ from . import process_energies
 from ctypes import *
 
 class Trajectory():
-    def __init__(self,top_fname,dat_fname,input_fname, dir_name,energy_fname):
+    def __init__(self,top_fname,dat_fname,input_fname, dir_name):
         self.top_fname = top_fname
         self.dat_fname = dat_fname
         self.input_fname = input_fname
         self.dir_name = dir_name
-        self.energy_fname = energy_fname
-
     def make_xyz_file(self,xyz_fname):
-
-	libname = os.path.abspath(
-	    os.path.join(os.path.dirname(__file__), "ox2xyzmodule.so"))
-
+        libname = os.path.abspath(os.path.dirname(__file__))
+        fnames = os.listdir(libname)
+        our_fname = list(filter(lambda x : "ox2xyz" in x, fnames))[0]
+        libname = os.path.abspath(os.path.join(os.path.dirname(__file__), our_fname))
+        print ("call")
         mod = CDLL(libname)
-        
+        print ("call2") 
         result = mod.ox2xyz_run(
-            str(self.dat_fname).encode("ascii"), str(self.top_fname).encode("ascii"),
-str(self.energy_fname).encode("ascii")
+            str(self.dat_fname).encode("ascii"), 
+            str(self.top_fname).encode("ascii"),
                     )
     
     def make_energy_file(self):
@@ -41,10 +40,9 @@ str(self.energy_fname).encode("ascii")
     def call_vmd(self):
         pass
 
-t = Trajectory("top","dat","input","data","energy")
+t = Trajectory("top","dat","input","data")
 t.make_xyz_file("test")
 t.make_energy_file()
 t.process_energy_file()
 t.make_psf()
 
-#would be convenient to do all this in a new directory
