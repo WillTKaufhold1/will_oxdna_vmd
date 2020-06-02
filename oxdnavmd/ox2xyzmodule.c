@@ -20,6 +20,7 @@ int ox2xyz_run(char dat_FNAME[],
     float DATA [9] ; 
     float STACK [3] ; 
     float BACK [3] ;
+    float a2 [3] ;
     FILE *fp_dat;
     fp_dat = fopen(dat_FNAME,"r");
     float BOX_SIZE = 0;
@@ -52,11 +53,23 @@ int ox2xyz_run(char dat_FNAME[],
                    DATA[i] = (DATA[i] + BOX_SIZE);
                 }
             }
+            //okay, so apparently a2 is the cross product of a3 and a1, which we'll do manually
+            //confusingly, in the oxdna code, a2 is given as the cross product of a3 and a1
+            // 0 1 2 , 3 4 5 , 6 7 8
+            a2[0] = DATA[7] * DATA[5] - DATA[8]*DATA[4];
+            a2[1] = DATA[8] * DATA[3] - DATA[5]*DATA[6];
+            a2[2] = DATA[6] * DATA[4] - DATA[7]*DATA[3];
+            // implementation of cross product
             // I should probably check this is correct
             for (int i=0; i < 3; i++) {
                 // check this!
-                STACK[i] = DATA[i] - 0.34 * DATA[i+3] + 0.3408 * DATA[i+6] ;   
-                BACK[i]  = DATA[i] + 0.34 * DATA[i+3] ;   
+                // this is wrong. because the axes are wrong.
+                // fuck I don't even have a third axis here.
+                STACK[i] = DATA[i] + 0.34 * DATA[i+3]  ;   
+                // Note, the BACK needs to be along the third axis.
+                // wait this is fucking wrong.
+                
+                BACK[i]  = DATA[i] - 0.34 * DATA[i+3] - 0.3408 * a2[i]  ; 
             }
             // print to new file. 
             fprintf(fp_xyz,"C %f %f %f\n", BACK[0], BACK[1], BACK[2]); 

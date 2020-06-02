@@ -1,2 +1,2 @@
-from .will_ox import Trajectory
+from .base import Trajectory
 
