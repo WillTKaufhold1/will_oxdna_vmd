@@ -1,10 +1,9 @@
 # Will's oxDNA scripts for VMD
+https://packaging.python.org/tutorials/packaging-projects/
 
-## Stuff slightly broken at the moment; I would avoid using...
+## Introduction
 
-## Intro
-
-I wanted to integrate oxDNA visualization effectively into VMD. These are a collection of scripts that perform this integration. 
+oxDNA visualization in VMD, with energy color coding.
 
 The scripts here take an oxDNA .dat file, and generate a .xyz file and a .psf file. Locations of stacking (S) and phosphate repulsion (BB) sites are placed in the .xyz file, and bond connectivity is placed in the .psf file. Bond connectivity includes one bond between the S site and BB site,and a second bond between BB sites that are connected.
 
@@ -22,56 +21,40 @@ There are also scripts here that extract energy profiles from simulation traject
 
 ## Example rendered images
 
-<img src="/images/2/CHAIN2.png" width="324" height="324">
-Fig. 1: A section of DNA origami colored by strand id. The red strand is the scaffold.
+## Dependencies
 
-<img src="/images/2/HB2.png" width="324" height="324">
-Fig. 2: Colored by mean HB energy. dsDNA is colored red (large negative HB energy); ssDNA is colored blue (0 HB energy). Crossovers and the terminii of strands are colored somewhere between as hydrogen bonding occurs here but not as strongly as in the origami bulk.
-
-<img src="/images/2/STCK2.png" width="324" height="324">
-Fig. 3: Colored by stacking energy: red is highly stacked; blue is unstacked. Observe substantial reduction of stacking energy at crossovers in the origami bulk. 
-
-<img src="/images/2/CTSTACK2.png" width="324" height="324">
-Fig. 4: Cross stacking; notice reduction at crossovers.
-
-<img src="/images/2/CXSTACK2.png" width="324" height="324">
-Fig. 5: Co-axial stacking; notice reduction at crossovers.
-
-<img src="/images/2/FENE2.png" width="324" height="324">
-Fig. 6: Colored by FENE potential (i.e. backbond connectivity cost). Since terminal nucleotides in strands only have one FENE potential instead of 2, these nucleotides have comparatively low FENE interaction energies. 
-
-<img src="/images/2/DH2.png" width="324" height="324">
-Fig. 7: Debye-Huckel potential (i.e. electrostatic repulsion)
-
-<img src="/images/2/TOTAL2.png" width="324" height="324">
-Fig. 8: Total energy
-
-## Requirements
-
-In principle I designed these scripts to generate files for VMD. However, they may work with any other visualization toolkit that can read and .xyz and .psf file.
-
-Python scripts need Python>=3.5 with numpy and pandas 
-
-Generation of energy files require the (oxDNA) DNAnalysis package to be in PATH.
-
-And I've only tested this on Linux, although it should probably work on OSX as well.
+# Linux operating system (or OS X)
+# gcc 
+# Python >= 3.5
+## numpy 
+## scipy
+## oxDNA
+## ctypes
 
 ## Instructions for use
 
-The general principle is to use DNAnalysis to generate an energy file detailing pairwise energies as a function of trajectory time, then use this energy file to construct a PSF. vmd can then read the PSF with which contains bond connectivity, and also read a converted xyz file which contains positional information. To trick vmd into color coding energies, the energy values are hidden in the charge attribute of the PSF. 
+The general principle is to use DNAnalysis to generate an energy file detailing pairwise energies as a function of trajectory time, then use this energy file to construct a PSF. vmd can then read the PSF with which contains bond connectivity, and also read a converted xyz file which contains positional information. To trick vmd into color coding energies, the energy values are hidden in the charge attribute of the PSF. In principle this pacakge will eventually integrate fully into vmd as a nicer solution than this ad hoc method.
 
-In the src directory, running the RUN.sh followed by the location of the the trajectory file and topology file should generate the relevant PSF files and XYZ files. Since energy is also generated, the input file which was used to run oxDNA is also needed.
+## Installation
 
-The XYZ files are placed in 1.traj-xyz-generation directory, and the PSF files are placed in the 3.psf-generation directory.
+If the given requirements are met, the software can be installed with the Python package manager pip:
 
-## Example 
+``` 
+pip install oxdnavmd
+```
+
+## Generating .xyz and .psf files
+
+
+
+## Visualization
 
 The example trajectory contains a short trajectory, with relevant PSF files. To look at the HB energy distribution,  run "vmd traj-HB.psf test.xyz", which should load the molecule. Subsequently in the vmd visualization menu, the color by section should be set to charge. For each PSF, coloring by strand is also possible. To do this, change the color by section to resid.
 
 
 ## Implementation
 
-Everything is wrapped as a Python package, although scripts will also run independently. Bottlenecks in Python have been writted in C, with Python wrappers. 
+Everything is wrapped into a Python package. Bottlenecks in trajectory processing have been written in C, with Python wrappers, using ctypes.
 
 
 

@@ -12,4 +12,5 @@ dat,top = sys.argv[1:]
 t = Trajectory(top,dat,"data")
 t.make_xyz_file()
 t.make_psf()
+t.write_vmd_dotfile()
 

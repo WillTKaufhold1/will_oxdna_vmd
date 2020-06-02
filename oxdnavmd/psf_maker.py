@@ -51,7 +51,6 @@ def write_psf(topfile,dump_dirname,use_energies = False):
         new_dict = copy(all_dict)
         new_dict['charge'] = double_energy(energy_dict[key])
 
-        breakpoint()
 
         df = pd.DataFrame.from_dict(new_dict)
         n = np.array(df)

@@ -1,0 +1,10 @@
+
+            axis location off
+color Display Background white
+mol default style {CPK 0.4 0.4 9 12}
+mol default material {AOChalky}
+display ambientocclusion on
+display shadows on
+menu main on
+
+            

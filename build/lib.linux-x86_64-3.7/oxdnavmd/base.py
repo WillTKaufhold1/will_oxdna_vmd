@@ -3,9 +3,7 @@ import os
 import subprocess
 from . import psf_maker
 from . import process_energies
-
 from pathlib import Path
-
 from ctypes import *
 
 class Trajectory():
@@ -29,16 +27,15 @@ class Trajectory():
         our_fname = list(filter(lambda x : "ox2xyz" in x, fnames))[0] 
         libname = os.path.abspath(os.path.join(os.path.dirname(__file__), our_fname))
         mod = CDLL(libname)
-        print (libname)
-        print (os.getcwd())
+
         self.traj_fname = self.prefix_name+".xyz"
 
         mod.ox2xyz_run(
             str(self.dat_fname).encode("ascii"),
             str(self.top_fname).encode("ascii"),
-            str(self.traj_fname).encode("ascii")
+            str(self.dir_name+'/'+self.traj_fname).encode("ascii")
                     )
-    
+ 
     def make_energy_file(self):
         suffix_string = "analysis_data_output_1 = {\nname = stdout\nprint_every = 1\ncol_1 = {\ntype=pair_energy}}"
         os.system(f'echo "{suffix_string}" > {self.dir_name}/suffix_file')
@@ -50,13 +47,9 @@ class Trajectory():
     
     def make_psf(self):
         psf_maker.write_psf(self.top_fname,self.dir_name)
-        
-    def call_vmd(self):
-        pass
-
-t = Trajectory("top","dat","data")
-t.make_xyz_file()
-#t.make_energy_file()
-#t.process_energy_file()
-#t.make_psf()
-
+        #in principle we should also be able to make a top file which doesn't color code
+    def write_vmd_dotfile(self):
+        with open(".vmdrc", 'w+') as f:
+            f.write("""
+            axis location off\ncolor Display Background white\nmol default style {CPK 0.4 0.4 9 12}\nmol default material {AOChalky}\ndisplay ambientocclusion on\ndisplay shadows on\nmenu main on\n
+            """)

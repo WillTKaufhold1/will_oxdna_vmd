@@ -6,7 +6,12 @@ import sys
 from functools import reduce
 from copy import copy
 
-def write_psf(topfile,dump_dirname):
+def double_energy(energy_data):
+    sanc_energy = np.array(list(zip(list(energy_data),list(energy_data),))).flatten()
+    sanc_energy = np.floor(sanc_energy*10000)/10000 
+    return sanc_energy
+
+def write_psf(topfile,dump_dirname,use_energies = False):
 
     with open(topfile,'r') as f: data = list(map(lambda x :x.replace('\n',''),f.readlines()))
 
@@ -28,29 +33,29 @@ def write_psf(topfile,dump_dirname):
     all_dict['mass'] = ['1']*Nts*2
     all_dict['zeroes'] = ['0']*Nts*2
 
-    import pickle as pkl
-    def double_energy(energy_data):
-        #takes an energy, converts it into the form we care about
-        sanc_energy = np.array(list(zip(list(energy_data),list(energy_data),))).flatten()
-        sanc_energy = np.floor(sanc_energy*10000)/10000 
-        # think we're going to have to actually be careful with this.
-        return sanc_energy
 
-    energy_data = np.array(pkl.load(open(f'./{dump_dirname}/averaged_data.pkl','rb'))) # list of values
-    #id1 id2 FENE BEXC STCK NEXC HB CRSTCK CXSTCK DH total, t = 10000
-    #consider applying a standard scaler to the energy_data?
-    energy_dict = {}
-    for index,name_ in enumerate(["FENE","BEXC","STCK","NEXC","HB","CRSTCK","CXSTACK","DH","total"]):
-        energy_dict[name_] = energy_data[:,index]
+    if use_energies:
+        import pickle as pkl
+        energy_data = np.array(pkl.load(open(f'./{dump_dirname}/averaged_data.pkl','rb'))) # list of values
+        #id1 id2 FENE BEXC STCK NEXC HB CRSTCK CXSTCK DH total, t = 10000
+        #consider applying a standard scaler to the energy_data?
+        energy_dict = {}
+        for index,name_ in enumerate(["FENE","BEXC","STCK","NEXC","HB","CRSTCK","CXSTACK","DH","total"]):
+            energy_dict[name_] = energy_data[:,index]
+    else:
+        energy_dict = {"RAW": list(np.zeros(Nts))} #energy_data?
 
-
+    #make sure if i haven't got an energy file to parse from i just parse normal.
     #want to make loads of different kinds of atoms files
     for key in energy_dict:
         new_dict = copy(all_dict)
         new_dict['charge'] = double_energy(energy_dict[key])
+
+
         df = pd.DataFrame.from_dict(new_dict)
         n = np.array(df)
         np.savetxt(f"ATOMS.{key}.txt", n, fmt = "% 8s% 4s% 5s% 7s% 5s% 5s% 12s% 14s% 12s")
+
 
     hydrogen_bonds = [(i,i+1) for i in range(1,Nts*2+1,2)]
 
