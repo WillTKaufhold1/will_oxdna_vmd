@@ -3,19 +3,13 @@
 #include <stdlib.h>
 
 int ox2xyz_run(char dat_FNAME[], 
-               char top_FNAME[],
-               char traj_xyz[])
+               char top_FNAME[])
 {
-
     FILE *fp_top;
     fp_top = fopen(top_FNAME,"r");
     char buff[1000]; // buffer
     fscanf(fp_top, "%s", buff);
     fclose(fp_top);
-
-    FILE *fp_xyz;
-    fp_xyz = fopen(traj_xyz, "w");
-
     int Num_nts = atoi(buff);
     float DATA [9] ; 
     float STACK [3] ; 
@@ -25,10 +19,10 @@ int ox2xyz_run(char dat_FNAME[],
     float BOX_SIZE = 0;
     while (fgets (buff, sizeof(buff), fp_dat)) {
         if (buff[0] == 't') {
-            fprintf(fp_xyz,"%d\n", Num_nts*2) ;
+            printf("%d\n", Num_nts*2) ;
         }
         if (buff[0] == 'b') {
-            fprintf(fp_xyz,"#molecule\n");
+            printf("#molecule\n");
             char * tmp_token = strtok(buff, " ");
             int i = 0;
             while (tmp_token != NULL) {
@@ -59,8 +53,8 @@ int ox2xyz_run(char dat_FNAME[],
                 BACK[i]  = DATA[i] + 0.34 * DATA[i+3] ;   
             }
             // print to new file. 
-            fprintf(fp_xyz,"C %f %f %f\n", BACK[0], BACK[1], BACK[2]); 
-            fprintf(fp_xyz,"O %f %f %f\n", STACK[0], STACK[1], STACK[2]); 
+            printf("C %f %f %f\n", BACK[0], BACK[1], BACK[2]); 
+            printf("O %f %f %f\n", STACK[0], STACK[1], STACK[2]); 
         }
     } 
     fclose(fp_dat);
@@ -68,3 +62,6 @@ int ox2xyz_run(char dat_FNAME[],
     return 0;
     }
 
+int main(){
+    ox2xyz_run("generated.dat", "generated.top");
+    return 0;}
