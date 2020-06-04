@@ -4,7 +4,8 @@
 
 int ox2xyz_run(char dat_FNAME[], 
                char top_FNAME[],
-               char traj_xyz[])
+               char traj_xyz[],
+               char is_periodic[])
 {
 
     FILE *fp_top;
@@ -48,11 +49,16 @@ int ox2xyz_run(char dat_FNAME[],
                 token = strtok(NULL, " ");
                 i ++ ;
             }
-            for (int i=0; i < 3 ; i++){
-                while (DATA[i] < 0){
-                   DATA[i] = (DATA[i] + BOX_SIZE);
+            // the next bit is only needed if we have periodic boundary conditions... not for like DNA...
+            if (is_periodic[0] == 'y'){  // shitty hack because not sure how to pass booleans
+                for (int i=0; i < 3 ; i++){
+                    while (DATA[i] < 0){
+
+                       DATA[i] = (DATA[i] + BOX_SIZE);
+                    }
                 }
             }
+           
             //okay, so apparently a2 is the cross product of a3 and a1, which we'll do manually
             //confusingly, in the oxdna code, a2 is given as the cross product of a3 and a1
             // 0 1 2 , 3 4 5 , 6 7 8

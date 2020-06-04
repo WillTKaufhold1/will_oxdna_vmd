@@ -40,12 +40,13 @@ class Trajectory():
     '''
 
     def __init__(self, top_fname, dat_fname , dir_name, 
-                 input_fname = None, prefix_name = "out"):
+                 input_fname = None, prefix_name = "out",periodic="no"):
         self.top_fname = top_fname
         self.dat_fname = dat_fname
         self.prefix_name = prefix_name
         self.input_fname = input_fname
         self.dir_name = dir_name
+        self.periodic = periodic
         if not Path(self.dat_fname).is_file():
             raise Exception(f"{self.dat_fname} does not exist")
         if not Path(self.top_fname).is_file():
@@ -65,7 +66,8 @@ class Trajectory():
         mod.ox2xyz_run(
             str(self.dat_fname).encode("ascii"),
             str(self.top_fname).encode("ascii"),
-            str(self.dir_name+'/'+self.traj_fname).encode("ascii")
+            str(self.dir_name+'/'+self.traj_fname).encode("ascii"),
+            str(self.periodic)
                     )
  
     def make_energy_file(self):
