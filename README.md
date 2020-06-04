@@ -23,13 +23,13 @@ There are also scripts here that extract energy profiles from simulation traject
 
 ## Dependencies
 
-# Linux operating system (or OS X)
-# gcc 
-# Python >= 3.5
-## numpy 
-## scipy
-## oxDNA
-## ctypes
+ Linux operating system (or OS X)
+ gcc 
+ Python >= 3.5
+ numpy 
+ scipy
+ oxDNA
+ ctypes
 
 ## Instructions for use
 
